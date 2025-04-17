@@ -36,6 +36,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            gap: 2px;
 
             input {
                max-width: 60px;
@@ -44,7 +45,24 @@
       }
 
       .btn {
-         margin-top: 20px;
+         display: block;
+         margin: 20px auto 0 auto;
+      }
+
+      output {
+         display: block;
+         margin: 20px auto 0 auto;
+         font-size: 1.1rem;
+         max-width: max-content;
+         padding: 8px 12px;
+         color: white;
+         background-color: var(--color-terceary);
+         border-radius: 4px;
+         opacity: 0;
+
+         &.active {
+            opacity: 1;
+         }
       }
    }
 }

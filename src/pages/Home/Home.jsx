@@ -8,13 +8,30 @@ import HistoryPreview from '../../components/HistoryPreview/HistoryPreview';
 // img
 import ImgEquacao from '../../assets/img/equacao.png';
 
+// utils
+import solveEquation from '../../utils/solveEquation';
+
 const Home = () => {
 	const [coeficienteA, setCoeficienteA] = useState(1);
 	const [coeficienteB, setCoeficienteB] = useState(1);
 	const [coeficienteC, setCoeficienteC] = useState(1);
 
+	const [result, setResult] = useState();
+
 	function handleSubmit(e) {
 		e.preventDefault();
+
+		const r = solveEquation(coeficienteA, coeficienteB, coeficienteC);
+
+		if (r === false) {
+			setResult('Não é uma equação de 2° grau');
+		} else if (r.length === 0) {
+			setResult('Sem raizes reais!');
+		} else if (r.length === 1) {
+			setResult('x = ' + r[0]);
+		} else {
+			setResult(`x = { ${r[0]} ; ${r[1]} }`);
+		}
 	}
 
 	return (
@@ -34,7 +51,9 @@ const Home = () => {
 								type="number"
 								required
 								value={coeficienteA}
-								onChange={(e) => setCoeficienteA(e.target.value)}
+								onChange={(e) =>
+									setCoeficienteA(Number(e.target.value))
+								}
 							/>
 						</label>
 						<label>
@@ -42,7 +61,9 @@ const Home = () => {
 							<input
 								type="number"
 								value={coeficienteB}
-								onChange={(e) => setCoeficienteB(e.target.value)}
+								onChange={(e) =>
+									setCoeficienteB(Number(e.target.value))
+								}
 							/>
 						</label>
 						<label>
@@ -50,12 +71,18 @@ const Home = () => {
 							<input
 								type="number"
 								value={coeficienteC}
-								onChange={(e) => setCoeficienteC(e.target.value)}
+								onChange={(e) =>
+									setCoeficienteC(Number(e.target.value))
+								}
 							/>
 						</label>
 					</div>
 
-					<button className='btn'>Calcular</button>
+					<button className="btn">Calcular</button>
+
+					<output className={result && result?.length && 'active'}>
+						Resultado: {result || ''}
+					</output>
 				</form>
 
 				<HistoryPreview />
