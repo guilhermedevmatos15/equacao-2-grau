@@ -9,10 +9,14 @@ function solveEquation(a = 1, b = 1, c = 1) {
 
 	if (delta === 0) return [(0 - b) / (2 * a)];
 
-	const rootDelta = Math.sqrt(delta);
+	let rootDelta = Math.sqrt(delta);
 
-	const x1 = (-b + rootDelta) / (2 * a);
-	const x2 = (-b - rootDelta) / (2 * a);
+	
+	let x1 = (-b + rootDelta) / (2 * a);
+	let x2 = (-b - rootDelta) / (2 * a);
+	
+	x1 = x1 % 1 === 0 ? x1 : x1.toFixed(2);
+	x2 = x2 % 1 === 0 ? x2 : x2.toFixed(2);
 
 	return [x1, x2];
 }
