@@ -1,0 +1,50 @@
+.Home {
+   width: 100%;
+   min-height: 100vh;
+   padding: 50px 30px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+
+   h1 {
+      font-size: 2rem;
+      max-width: 400px;
+      margin: auto;
+   }
+
+   img {
+      margin-top: 30px;
+      width: 100%;
+      max-width: 300px;
+   }
+
+   p {
+      margin-top: 30px;
+   }
+
+   form {
+      margin-top: 20px;
+
+      div {
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         gap: 20px;
+
+         label {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            input {
+               max-width: 60px;
+            }
+         }
+      }
+
+      .btn {
+         margin-top: 20px;
+      }
+   }
+}
