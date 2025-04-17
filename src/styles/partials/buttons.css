@@ -1,0 +1,12 @@
+.btn {
+	padding: 8px;
+	border: none;
+	border-radius: 5px;
+	font-size: 0.9rem;
+	color: #fff;
+	background-color: var(--color-primary);
+
+	&:hover {
+		box-shadow: 0 0 10px var(--color-primary);
+	}
+}
