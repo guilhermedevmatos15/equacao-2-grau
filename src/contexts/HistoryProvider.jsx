@@ -1,18 +1,30 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useEffect, useReducer } from 'react';
 
 const HistoryContext = createContext();
 
 const KEY_LOCAL_STORAGE = 'history';
 
 const HistoryProvider = ({ children }) => {
-	const [history, setHistory] = useState();
+	function reducer(state, { type, payload }) {
+		switch (type) {
+			case 'SET_ALL_HISTORY':
+				return payload;
+			case 'RESET_HISTORY':
+				return [];
+			case 'ADD':
+				return [...state, payload];
+		}
+	}
+
+	const [history, dispatch] = useReducer(reducer, []);
 
 	useEffect(() => {
 		const dataLocal =
 			JSON.parse(localStorage.getItem(KEY_LOCAL_STORAGE)) || [];
 
-		if (!dataLocal?.length) setHistory([...dataLocal]);
-		else setHistory([]);
+		if (!dataLocal?.length)
+			dispatch({ type: 'SET_ALL_HISTORY', payload: [...dataLocal] });
+		else dispatch({ type: 'SET_ALL_HISTORY', payload: [] });
 	}, []);
 
 	useEffect(() => {
@@ -20,7 +32,7 @@ const HistoryProvider = ({ children }) => {
 	}, [history]);
 
 	return (
-		<HistoryContext.Provider value={{ history, setHistory }}>
+		<HistoryContext.Provider value={{ history, dispatch }}>
 			{children}
 		</HistoryContext.Provider>
 	);
