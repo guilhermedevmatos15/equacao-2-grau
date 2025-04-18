@@ -1,6 +1,6 @@
 import { createContext, useEffect, useReducer } from 'react';
 
-const HistoryContext = createContext();
+export const HistoryContext = createContext();
 
 const KEY_LOCAL_STORAGE = 'history';
 
@@ -22,7 +22,7 @@ const HistoryProvider = ({ children }) => {
 		const dataLocal =
 			JSON.parse(localStorage.getItem(KEY_LOCAL_STORAGE)) || [];
 
-		if (!dataLocal?.length)
+		if (dataLocal?.length)
 			dispatch({ type: 'SET_ALL_HISTORY', payload: [...dataLocal] });
 		else dispatch({ type: 'SET_ALL_HISTORY', payload: [] });
 	}, []);

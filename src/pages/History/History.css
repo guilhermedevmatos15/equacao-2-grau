@@ -1,0 +1,8 @@
+.History {
+   width: 100%;
+   min-height: 100vh;
+   padding: 50px 30px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}

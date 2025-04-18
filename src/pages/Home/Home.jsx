@@ -1,5 +1,7 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { Link } from 'react-router-dom';
 
+// styles
 import './Home.css';
 
 // components
@@ -11,7 +13,12 @@ import ImgEquacao from '../../assets/img/equacao.png';
 // utils
 import solveEquation from '../../utils/solveEquation';
 
+// contexts
+import { HistoryContext } from '../../contexts/HistoryProvider';
+
 const Home = () => {
+	const { dispatch } = useContext(HistoryContext);
+
 	const [coeficienteA, setCoeficienteA] = useState(1);
 	const [coeficienteB, setCoeficienteB] = useState(1);
 	const [coeficienteC, setCoeficienteC] = useState(1);
@@ -21,17 +28,38 @@ const Home = () => {
 	function handleSubmit(e) {
 		e.preventDefault();
 
-		const r = solveEquation(coeficienteA, coeficienteB, coeficienteC);
+		let r = solveEquation(coeficienteA, coeficienteB, coeficienteC);
 
 		if (r === false) {
-			setResult('Não é uma equação de 2° grau');
+			r = 'Não é uma equação de 2° grau';
 		} else if (r.length === 0) {
-			setResult('Sem raizes reais!');
+			r = 'Sem raizes reais!';
 		} else if (r.length === 1) {
-			setResult('x = ' + r[0]);
+			r = 'x = ' + r[0];
 		} else {
-			setResult(`x = { ${r[0]} ; ${r[1]} }`);
+			r = `x = { ${r[0]} ; ${r[1]} }`;
 		}
+
+		setResult(r);
+
+		const newDate = new Date();
+
+		dispatch({
+			type: 'ADD',
+			payload: {
+				coefA: coeficienteA,
+				coefB: coeficienteB,
+				coefC: coeficienteC,
+				result: r,
+				date: `${
+					newDate.getDate() +
+					'/' +
+					(newDate.getMonth() + 1 < 10
+						? '0' + (newDate.getMonth() + 1)
+						: newDate.getMonth() + 1)
+				} - ${newDate.getHours()}:${newDate.getMinutes()}`,
+			},
+		});
 	}
 
 	return (
@@ -86,6 +114,10 @@ const Home = () => {
 				</form>
 
 				<HistoryPreview />
+
+				<p className="cta">
+					<Link to="/history">Go to history</Link>
+				</p>
 			</main>
 		</div>
 	);
