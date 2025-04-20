@@ -57,7 +57,11 @@ const Home = () => {
 					(newDate.getMonth() + 1 < 10
 						? '0' + (newDate.getMonth() + 1)
 						: newDate.getMonth() + 1)
-				} - ${newDate.getHours()}:${newDate.getMinutes()}`,
+				} - ${newDate.getHours()}:${
+					newDate.getMinutes() < 10
+						? '0' + newDate.getMinutes()
+						: newDate.getMinutes()
+				}`,
 			},
 		});
 	}

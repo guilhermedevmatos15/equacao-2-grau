@@ -5,4 +5,37 @@
    display: flex;
    justify-content: center;
    align-items: center;
+
+   main {
+      width: 100%;
+      max-width: 500px;
+      background-color: white;
+      padding: 30px 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px #00000034;
+
+      table {
+         width: 100%;
+         margin: 20px auto 0 auto;
+         border-collapse: collapse;
+
+         td, th {
+            padding: 4px 5px;
+            border: 1px solid rgba(0, 0, 0, 0.525);
+         }
+
+         thead {
+            background-color: var(--color-secondary);
+            color: white;
+         }
+         tfoot {
+            background-color: var(--color-terceary);
+            color: white;
+         }
+      }
+
+      p {
+         margin-top: 20px;
+      }
+   }
 }
